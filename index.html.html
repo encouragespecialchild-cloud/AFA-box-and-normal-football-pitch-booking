@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aligarh Football Academy - Pitch Booking</title>
+  
+  <!-- Google Search Console Verification Meta Tag -->
+  <meta name="google-site-verification" content="3pQkjCfx5JUZmARnx_0UHmX8aIX2uQOgbOtxrG1jXD0" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+    body { font-family: 'Plus Jakarta Sans', sans-serif; }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col justify-between">
+
+  <!-- HEADER / NAVBAR -->
+  <header class="border-b border-slate-800 bg-slate-900/90 backdrop-blur-md sticky top-0 z-40">
+    <div class="max-w-4xl mx-auto px-4 py-3 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        
+        <!-- AFA CREST LOGO SVG -->
+        <svg class="w-12 h-12 shrink-0 drop-shadow-md" viewBox="0 0 200 200">
+          <circle cx="100" cy="100" r="96" fill="#b91c1c" stroke="#7f1d1d" stroke-width="4"/>
+          <circle cx="100" cy="100" r="74" fill="none" stroke="#fef08a" stroke-width="1.5" stroke-dasharray="3 3"/>
+          <circle cx="100" cy="100" r="68" fill="url(#goldGrad)" stroke="#b45309" stroke-width="2"/>
+          <defs>
+            <radialGradient id="goldGrad" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#fef08a"/>
+              <stop offset="50%" stop-color="#eab308"/>
+              <stop offset="100%" stop-color="#ca8a04"/>
+            </radialGradient>
+          </defs>
+          <path d="M 22,100 A 78,78 0 0,1 178,100" id="textPathTop" fill="none"/>
+          <text font-size="11.5" font-weight="900" fill="#ffffff" letter-spacing="1">
+            <textPath href="#textPathTop" startOffset="50%" text-anchor="middle">ALIGARH FOOTBALL ACADEMY</textPath>
+          </text>
+          <path d="M 166,100 A 66,66 0 0,1 34,100" id="textPathBottom" fill="none"/>
+          <text font-size="13" font-weight="900" fill="#ffffff" letter-spacing="2">
+            <textPath href="#textPathBottom" startOffset="50%" text-anchor="middle">★ ALIGARH ★</textPath>
+          </text>
+          <g fill="#7f1d1d">
+            <path d="M72 74 C80 82 100 86 108 90 C114 93 118 100 120 108 L114 116 L108 106 C102 98 94 96 86 92 C80 102 88 116 102 128 L114 148 L104 150 L92 134 C82 122 72 110 76 96 C70 102 60 114 54 122 L46 118 C54 108 66 94 72 74 Z" />
+            <circle cx="100" cy="66" r="6"/>
+            <circle cx="122" cy="144" r="7" fill="#ffffff"/>
+          </g>
+        </svg>
+
+        <div>
+          <h1 class="font-extrabold text-base md:text-lg text-white leading-tight">Aligarh Football Academy</h1>
+          <p class="text-xs text-red-500 font-bold tracking-wider uppercase">Official Pitch Booking</p>
+        </div>
+      </div>
+
+      <!-- REFRESH EVERYTHING BUTTON -->
+      <button onclick="refreshEverything()" class="bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 px-3 py-1.5 rounded-xl text-xs font-bold transition flex items-center gap-1.5 shadow-md">
+        <i class="fa-solid fa-rotate-right text-emerald-400"></i> Refresh Form
+      </button>
+    </div>
+  </header>
+
+  <!-- MAIN CONTAINER -->
+  <main class="max-w-4xl mx-auto px-4 py-8 w-full flex-1 space-y-6">
+
+    <!-- BANNER -->
+    <div class="bg-gradient-to-r from-red-950 via-slate-900 to-slate-950 border border-red-900/40 rounded-3xl p-6 relative overflow-hidden shadow-2xl">
+      <div class="relative z-10">
+        <span class="bg-red-600/20 text-red-400 border border-red-500/30 text-[10px] font-black uppercase px-2.5 py-1 rounded-full">Natural Grass Pitches</span>
+        <h2 class="text-2xl md:text-3xl font-black text-white mt-2">Reserve Your Pitch Slot</h2>
+        <p class="text-xs text-slate-300 mt-1 max-w-md">Select your ground type, timing, payment preference, and send your booking request directly to WhatsApp.</p>
+      </div>
+    </div>
+
+    <!-- BOOKING FORM -->
+    <form id="bookingForm" onsubmit="handleFormSubmit(event)" class="space-y-6">
+      
+      <!-- 1. GROUND TYPE SELECTION -->
+      <div>
+        <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-3">1. Select Ground Type</label>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          
+          <label class="relative cursor-pointer group">
+            <input type="radio" name="groundType" id="groundBox" value="Box Football (Natural Grass)" data-price="600" checked onchange="calculateTotal()" class="peer sr-only">
+            <div class="bg-slate-900 border-2 border-slate-800 peer-checked:border-red-500 peer-checked:bg-red-950/20 p-5 rounded-2xl transition shadow-md group-hover:border-slate-700">
+              <div class="flex justify-between items-start">
+                <div>
+                  <h3 class="font-extrabold text-white text-base">Box Football</h3>
+                  <p class="text-xs text-slate-400 mt-0.5">Natural grass / enclosed match</p>
+                </div>
+                <span class="bg-red-600/20 text-red-400 font-extrabold text-xs px-2.5 py-1 rounded-lg border border-red-500/30">₹600 / hr</span>
+              </div>
+            </div>
+          </label>
+
+          <label class="relative cursor-pointer group">
+            <input type="radio" name="groundType" id="groundNormal" value="Normal Football Ground (Natural Grass)" data-price="700" onchange="calculateTotal()" class="peer sr-only">
+            <div class="bg-slate-900 border-2 border-slate-800 peer-checked:border-red-500 peer-checked:bg-red-950/20 p-5 rounded-2xl transition shadow-md group-hover:border-slate-700">
+              <div class="flex justify-between items-start">
+                <div>
+                  <h3 class="font-extrabold text-white text-base">Normal Football Ground</h3>
+                  <p class="text-xs text-slate-400 mt-0.5">Standard natural grass pitch</p>
+                </div>
+                <span class="bg-red-600/20 text-red-400 font-extrabold text-xs px-2.5 py-1 rounded-lg border border-red-500/30">₹700 / hr</span>
+              </div>
+            </div>
+          </label>
+
+        </div>
+      </div>
+
+      <!-- 2. CONTACT & TEAM DETAILS -->
+      <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 space-y-4 shadow-xl">
+        <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">2. Contact & Team Details</label>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs text-slate-400 mb-1">Full Name *</label>
+            <input type="text" id="custName" required placeholder="e.g. Rahul Sharma"
+                   class="w-full bg-slate-950 border border-slate-800 focus:border-red-500 text-slate-100 text-sm py-2.5 px-3.5 rounded-xl outline-none transition">
+          </div>
+          <div>
+            <label class="block text-xs text-slate-400 mb-1">Phone Number (10 Digits) *</label>
+            <input type="tel" id="custPhone" required pattern="[0-9]{10}" placeholder="8171859140"
+                   class="w-full bg-slate-950 border border-slate-800 focus:border-red-500 text-slate-100 text-sm py-2.5 px-3.5 rounded-xl outline-none transition">
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs text-slate-400 mb-1">Team / Group Name <span class="text-slate-500 font-normal">(Optional)</span></label>
+            <input type="text" id="teamName" placeholder="e.g. Aligarh Strikers"
+                   class="w-full bg-slate-950 border border-slate-800 focus:border-red-500 text-slate-100 text-sm py-2.5 px-3.5 rounded-xl outline-none transition">
+          </div>
+          <div>
+            <label class="block text-xs text-slate-400 mb-1">Number of Players *</label>
+            <input type="number" id="playerCount" min="1" max="30" value="10" required
+                   class="w-full bg-slate-950 border border-slate-800 focus:border-red-500 text-slate-100 text-sm py-2.5 px-3.5 rounded-xl outline-none transition">
+          </div>
+        </div>
+
+        <hr class="border-slate-800 my-2">
+
+        <!-- 3. DATE & TIME SLOTS -->
+        <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">3. Date & Time Slot</label>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div>
+            <label class="block text-xs text-slate-400 mb-1">Booking Date</label>
+            <input type="date" id="bookingDate" required onchange="calculateTotal()"
+                   class="w-full bg-slate-950 border border-slate-800 focus:border-red-500 text-slate-100 text-sm py-2.5 px-3.5 rounded-xl outline-none transition">
+          </div>
+          <div>
+            <label class="block text-xs text-slate-400 mb-1">Start Time</label>
+            <input type="time" id="startTime" required value="17:00" onchange="calculateTotal()"
+                   class="w-full bg-slate-950 border border-slate-800 focus:border-red-500 text-slate-100 text-sm py-2.5 px-3.5 rounded-xl outline-none transition">
+          </div>
+          <div>
+            <label class="block text-xs text-slate-400 mb-1">End Time</label>
+            <input type="time" id="endTime" required value="18:00" onchange="calculateTotal()"
+                   class="w-full bg-slate-950 border border-slate-800 focus:border-red-500 text-slate-100 text-sm py-2.5 px-3.5 rounded-xl outline-none transition">
+          </div>
+        </div>
+
+        <!-- 4. PAYMENT METHOD (CASH & UPI/PAYTM) -->
+        <hr class="border-slate-800 my-2">
+        <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">4. Payment Preference</label>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <label class="flex items-center gap-3 bg-slate-950 border border-slate-800 p-3.5 rounded-xl cursor-pointer hover:border-slate-700">
+            <input type="radio" name="paymentMethod" value="Cash" checked onchange="toggleUpiSection()" class="text-red-600 focus:ring-0">
+            <div>
+              <div class="text-sm font-bold text-white">Cash on Arrival</div>
+              <div class="text-[11px] text-slate-400">Pay cash at desk prior to kickoff</div>
+            </div>
+          </label>
+
+          <label class="flex items-center gap-3 bg-slate-950 border border-slate-800 p-3.5 rounded-xl cursor-pointer hover:border-slate-700">
+            <input type="radio" name="paymentMethod" value="UPI" id="payMethodUpi" onchange="toggleUpiSection()" class="text-red-600 focus:ring-0">
+            <div>
+              <div class="text-sm font-bold text-white">Online UPI / QR Code</div>
+              <div class="text-[11px] text-emerald-400 font-semibold">Paytm / PhonePe / GPay</div>
+            </div>
+          </label>
+        </div>
+
+        <!-- DYNAMIC ONLINE PAYMENT BOX (PAYTM QR CODE) -->
+        <div id="upiPaymentBox" class="hidden bg-slate-950 border-2 border-emerald-500/40 rounded-2xl p-5 text-center space-y-4">
+          <div class="inline-flex items-center gap-2 bg-emerald-500/10 text-emerald-400 px-3 py-1 rounded-full text-xs font-bold border border-emerald-500/20">
+            <i class="fa-solid fa-qrcode"></i> Scan & Pay via Any UPI App
+          </div>
+
+          <!-- DILSHAD AHMAD PAYTM QR CODE DISPLAY -->
+          <div class="bg-white p-4 rounded-2xl max-w-[240px] mx-auto shadow-2xl">
+            <div class="text-slate-900 font-black text-sm mb-1">Dilshad Ahmad</div>
+            <div class="text-[11px] text-slate-600 font-mono mb-3">UPI ID: 8171859140@ptsbi</div>
+            
+            <div class="relative bg-slate-100 rounded-xl p-2 border border-slate-200">
+              <img id="qrImageDisplay" src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=upi://pay?pa=8171859140@ptsbi%26pn=Dilshad%20Ahmad" alt="UPI QR Code" class="w-full h-auto rounded-lg mx-auto">
+            </div>
+            <p class="text-[10px] text-slate-500 mt-2">Accepted on Paytm, PhonePe, Google Pay, BHIM</p>
+          </div>
+
+          <div class="max-w-xs mx-auto space-y-2">
+            <a id="directUpiBtn" href="upi://pay?pa=8171859140@ptsbi&pn=Dilshad%20Ahmad&am=600&cu=INR" 
+               class="block w-full bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold py-2.5 rounded-xl text-xs transition shadow-lg shadow-emerald-600/20">
+              <i class="fa-solid fa-mobile-screen mr-1.5"></i> Open Mobile UPI App
+            </a>
+            <div class="text-[11px] text-slate-400">Or manually transfer to Phone: <strong class="text-white">8171859140</strong></div>
+          </div>
+
+          <div class="pt-2 border-t border-slate-800/80 text-left">
+            <label class="block text-xs font-bold text-amber-400 mb-1">Enter 12-digit UPI UTR / Transaction Reference Number *</label>
+            <input type="text" id="upiUtr" placeholder="e.g. 428910XXXXXX"
+                   class="w-full bg-slate-900 border border-slate-800 focus:border-emerald-500 text-slate-100 text-xs py-2.5 px-3.5 rounded-xl outline-none transition">
+            <p class="text-[10px] text-slate-500 mt-1">*Required for online payments.</p>
+          </div>
+        </div>
+
+        <!-- AGREEMENT -->
+        <div class="pt-2">
+          <label class="flex items-start gap-2.5 text-xs text-slate-400 cursor-pointer">
+            <input type="checkbox" required class="mt-0.5 rounded border-slate-800 bg-slate-950 text-red-600 focus:ring-0">
+            <span>I agree to follow Aligarh Football Academy ground rules and timing schedules.</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- UNDO LAST BOOKING NOTIFICATION BAR -->
+      <div id="undoNotification" class="hidden bg-amber-950/60 border border-amber-800/80 rounded-2xl p-4 flex items-center justify-between shadow-xl">
+        <div class="flex items-center gap-2 text-xs text-amber-300">
+          <i class="fa-solid fa-circle-info text-amber-400 text-base"></i>
+          <span>Booking sent to WhatsApp. Made a mistake? Click undo to send a cancellation request.</span>
+        </div>
+        <button type="button" onclick="undoLastBooking()" class="bg-amber-600 hover:bg-amber-500 text-slate-950 font-black px-4 py-2 rounded-xl text-xs transition shadow-md shrink-0 flex items-center gap-1.5">
+          <i class="fa-solid fa-rotate-left"></i> Undo Booking
+        </button>
+      </div>
+
+      <!-- TOTAL PRICING & WHATSAPP BUTTON -->
+      <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-xl">
+        <div>
+          <span class="text-xs text-slate-400 font-semibold uppercase">Total Calculated Charge</span>
+          <div class="flex items-baseline gap-2">
+            <h3 id="calcTotal" class="text-3xl font-black text-emerald-400">₹600</h3>
+            <span id="calcDuration" class="text-xs text-slate-400">(1 hour duration)</span>
+          </div>
+        </div>
+
+        <!-- PROMINENT RED BUTTON -->
+        <button type="submit" class="w-full sm:w-auto bg-red-600 hover:bg-red-500 text-white font-extrabold px-8 py-4 rounded-xl transition shadow-lg shadow-red-600/30 text-base flex items-center justify-center gap-2">
+          <i class="fa-brands fa-whatsapp text-xl"></i> SEND TO WHATSAPP
+        </button>
+      </div>
+
+    </form>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="border-t border-slate-800 bg-slate-900/50 py-4 text-center text-xs text-slate-500">
+    <p>Aligarh Football Academy • Support: <strong class="text-slate-300">8171859140</strong></p>
+  </footer>
+
+  <script>
+    let lastBookingData = null;
+
+    // Set default date to today
+    document.getElementById('bookingDate').valueAsDate = new Date();
+
+    function toggleUpiSection() {
+      const isUpi = document.getElementById('payMethodUpi').checked;
+      const upiBox = document.getElementById('upiPaymentBox');
+      const utrInput = document.getElementById('upiUtr');
+      if (isUpi) {
+        upiBox.classList.remove('hidden');
+        utrInput.required = true;
+      } else {
+        upiBox.classList.add('hidden');
+        utrInput.required = false;
+      }
+    }
+
+    function refreshEverything() {
+      document.getElementById('bookingForm').reset();
+      document.getElementById('groundBox').checked = true;
+      document.getElementById('bookingDate').valueAsDate = new Date();
+      document.getElementById('startTime').value = "17:00";
+      document.getElementById('endTime').value = "18:00";
+      document.getElementById('undoNotification').classList.add('hidden');
+      toggleUpiSection();
+      lastBookingData = null;
+      calculateTotal();
+    }
+
+    function calculateTotal() {
+      const groundRadio = document.querySelector('input[name="groundType"]:checked');
+      const hourlyRate = parseInt(groundRadio.getAttribute('data-price'));
+      const start = document.getElementById('startTime').value;
+      const end = document.getElementById('endTime').value;
+
+      let hours = 1;
+      if (start && end) {
+        const startDate = new Date(`1970-01-01T${start}:00`);
+        const endDate = new Date(`1970-01-01T${end}:00`);
+        let diffHours = (endDate - startDate) / (1000 * 60 * 60);
+        if (diffHours <= 0) diffHours += 24;
+        hours = diffHours;
+      }
+
+      const total = Math.round(hours * hourlyRate);
+      document.getElementById('calcTotal').innerText = `₹${total}`;
+      document.getElementById('calcDuration').innerText = `(${hours} hour${hours > 1 ? 's' : ''} duration)`;
+
+      const upiBtn = document.getElementById('directUpiBtn');
+      if (upiBtn) {
+        upiBtn.href = `upi://pay?pa=8171859140@ptsbi&pn=Dilshad%20Ahmad&am=${total}&cu=INR`;
+      }
+
+      return { total, hours };
+    }
+
+    function handleFormSubmit(e) {
+      e.preventDefault();
+      
+      const isUpi = document.getElementById('payMethodUpi').checked;
+      const utr = isUpi ? document.getElementById('upiUtr').value.trim() : '';
+      
+      if (isUpi && !utr) {
+        alert("Please enter your 12-digit UPI UTR number to proceed with online payment.");
+        return;
+      }
+
+      const { total, hours } = calculateTotal();
+      const name = document.getElementById('custName').value.trim();
+      const phone = document.getElementById('custPhone').value.trim();
+      const team = document.getElementById('teamName').value.trim() || 'N/A';
+      const players = document.getElementById('playerCount').value;
+      const ground = document.querySelector('input[name="groundType"]:checked').value;
+      const date = document.getElementById('bookingDate').value;
+      const start = document.getElementById('startTime').value;
+      const end = document.getElementById('endTime').value;
+      const paymentStr = isUpi ? `UPI Online (UTR: ${utr})` : 'Cash on Arrival';
+
+      // Save for Undo feature
+      lastBookingData = { name, phone, team, players, ground, date, start, end, hours, total, paymentStr };
+
+      const message = 
+`*NEW PITCH BOOKING REQUEST*
+--------------------------------
+*Academy:* Aligarh Football Academy
+*Customer Name:* ${name}
+*Phone Number:* ${phone}
+*Team Name:* ${team}
+*Players:* ${players}
+*Ground:* ${ground}
+*Date:* ${date}
+*Slot:* ${start} - ${end} (${hours} hrs)
+*Total Charge:* ₹${total}
+*Payment Method:* ${paymentStr}
+--------------------------------
+Please confirm slot availability!`;
+
+      // Reveal Undo notification bar
+      document.getElementById('undoNotification').classList.remove('hidden');
+
+      // Direct WhatsApp redirect targeting +91 8171859140
+      const whatsappUrl = `https://wa.me/918171859140?text=${encodeURIComponent(message)}`;
+      window.open(whatsappUrl, '_blank');
+    }
+
+    function undoLastBooking() {
+      if (!lastBookingData) return;
+
+      const undoMessage = 
+`*CANCEL / UNDO BOOKING REQUEST*
+--------------------------------
+*Academy:* Aligarh Football Academy
+*Customer Name:* ${lastBookingData.name}
+*Phone Number:* ${lastBookingData.phone}
+*Team Name:* ${lastBookingData.team}
+*Ground:* ${lastBookingData.ground}
+*Date:* ${lastBookingData.date}
+*Slot:* ${lastBookingData.start} - ${lastBookingData.end}
+
+Please cancel/ignore my previous booking request. Thank you!`;
+
+      const whatsappUrl = `https://wa.me/918171859140?text=${encodeURIComponent(undoMessage)}`;
+      window.open(whatsappUrl, '_blank');
+
+      refreshEverything();
+    }
+
+    calculateTotal();
+  </script>
+</body>
+<script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/13.2.0/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/13.2.0/firebase-analytics.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  const firebaseConfig = {
+    apiKey: "AIzaSyA-3lO2K1b-3feMEaYa-YqXteZJQyBYDUI",
+    authDomain: "afa-box-football-pitch-booking.firebaseapp.com",
+    projectId: "afa-box-football-pitch-booking",
+    storageBucket: "afa-box-football-pitch-booking.firebasestorage.app",
+    messagingSenderId: "961763459426",
+    appId: "1:961763459426:web:73083e4abef3dfb3e1ac3b",
+    measurementId: "G-QT7XN0WE1B"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+</script>
+
+</html>
